@@ -20,8 +20,6 @@ public class MemberDto {
         }
     }
 
-    @Builder
-    @AllArgsConstructor
     @Getter
     public static class Response{
         private Long memberId;

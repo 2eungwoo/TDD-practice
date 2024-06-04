@@ -15,12 +15,12 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public MemberDto.Response saveMember(MemberDto.Request request){
 
         Member savedMember = memberRepository.save(request.toEntity());
 
-        MemberDto.Response savedMemberResponseDto = new MemberDto.Response(savedMember);
-        return savedMemberResponseDto;
+        return new MemberDto.Response(savedMember);
     }
 
     @Transactional(readOnly = true)
@@ -28,7 +28,6 @@ public class MemberService {
         Member foundMember = memberRepository.findById(memberId)
                 .orElseThrow(()-> new NoSuchElementException("유저없음"));
 
-        MemberDto.Response memberResponseDto = new MemberDto.Response(foundMember);
-        return memberResponseDto;
+        return new MemberDto.Response(foundMember);
     }
 }
